@@ -10,12 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Carthage
-        run: brew install carthage
-
-      - name: Install dependencies
-        run: carthage bootstrap --platform iOS
-
       - name: Build WDA
         run: |
           xcodebuild clean build-for-testing \
