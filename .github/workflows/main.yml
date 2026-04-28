@@ -1,0 +1,40 @@
+name: Build WDA IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Carthage
+        run: brew install carthage
+
+      - name: Install dependencies
+        run: carthage bootstrap --platform iOS
+
+      - name: Build WDA
+        run: |
+          xcodebuild clean build-for-testing \
+          -project WebDriverAgent.xcodeproj \
+          -scheme WebDriverAgentRunner \
+          -destination 'generic/platform=iOS' \
+          -derivedDataPath build \
+          CODE_SIGNING_ALLOWED=NO
+
+      - name: Create IPA
+        run: |
+          mkdir Payload
+          APP_PATH=$(find build -name "*.app" | head -n 1)
+          echo "FOUND APP: $APP_PATH"
+          cp -r "$APP_PATH" Payload/
+          zip -r WDA.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: WDA-IPA
+          path: WDA.ipa
