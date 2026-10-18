@@ -12,6 +12,8 @@ export interface ProfileConfig {
   // Show the verification badge ONLY if the profile is verified on the platform.
   verified: boolean;
   tagline: string;
+  // City (and country) shown under the name and in About me. Leave empty to hide it.
+  location: string;
   bio: string[];
   facts: ProfileFact[];
   contentTypes: string[];
@@ -30,13 +32,13 @@ export const PROFILE: ProfileConfig = {
   verified: false,
   tagline:
     'Film photographer and slow traveller. Studio days, road notes and everything in between.',
+  location: 'Lisbon, Portugal',
   bio: [
     "Hi, I'm Aria. I shoot on film, live out of a carry-on half the year and spend the other half in a tiny studio in Lisbon with far too many plants.",
     "This is where I post what doesn't make it to my public feed: full photo sets, behind-the-scenes clips from shoots, outfit try-ons and the occasional voice note when I'm too tired to type.",
     "I read every message myself. I'm usually around in the evenings, Lisbon time, so if I don't answer straight away I'll get back to you. Be kind, be curious, and tell me where you're writing from.",
   ],
   facts: [
-    {icon: 'pin', label: 'Lisbon, Portugal'},
     {icon: 'globe', label: 'English, Português, Polski'},
     {icon: 'calendar', label: 'New posts every week'},
   ],

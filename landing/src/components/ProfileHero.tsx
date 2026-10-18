@@ -4,7 +4,7 @@ import {SITE} from '../config/site';
 import {useRegistration} from '../context/registration';
 import {shareLink} from '../lib/share';
 import {AffiliateLink} from './AffiliateLink';
-import {LockIcon, PlusIcon, ShareIcon, VerifiedIcon} from './Icons';
+import {LockIcon, PinIcon, PlusIcon, ShareIcon, VerifiedIcon} from './Icons';
 import {ProfileStats} from './ProfileStats';
 import styles from './ProfileHero.module.css';
 
@@ -104,6 +104,13 @@ export function ProfileHero({active, available, onNotify}: ProfileHeroProps) {
 
         <div className={styles.meta}>
           <span className={styles.handle}>@{PROFILE.handle}</span>
+          {PROFILE.location && (
+            <span className={styles.location}>
+              <PinIcon size={16} />
+              <span className="sr-only">Location: </span>
+              {PROFILE.location}
+            </span>
+          )}
           {availability.mode !== 'hidden' &&
             (available ? (
               <span className={styles.status} data-visible={statusShown || undefined}>

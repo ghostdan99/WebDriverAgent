@@ -43,6 +43,10 @@ export function ProfileBio() {
     return () => observer.disconnect();
   }, []);
 
+  const facts: ProfileFact[] = PROFILE.location
+    ? [{icon: 'pin', label: PROFILE.location}, ...PROFILE.facts]
+    : PROFILE.facts;
+
   const toggle = () => {
     if (!expanded) {
       track('bio_expand', {profile: PROFILE.handle});
@@ -83,7 +87,7 @@ export function ProfileBio() {
       )}
 
       <ul className={styles.facts}>
-        {PROFILE.facts.map((fact) => {
+        {facts.map((fact) => {
           const Icon = FACT_ICONS[fact.icon];
           return (
             <li key={fact.label}>

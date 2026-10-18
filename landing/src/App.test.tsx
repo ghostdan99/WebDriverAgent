@@ -4,6 +4,7 @@ import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {App} from './App';
 import {AGE_GATE_STORAGE_KEY} from './components/AgeGate';
 import {AFFILIATE_URL} from './config/affiliate';
+import {PROFILE} from './config/profile';
 import {type AnalyticsEventName, onTrack} from './lib/analytics';
 
 let events: Array<{name: AnalyticsEventName; params: unknown}> = [];
@@ -70,6 +71,14 @@ describe('profile', () => {
     await user.click(screen.getByRole('button', {name: 'Share profile'}));
     expect(await screen.findByText('Profile link copied')).toBeInTheDocument();
     await expect(navigator.clipboard.readText()).resolves.toBe(window.location.href);
+  });
+
+  it('shows the location under the name and in About me', () => {
+    renderPastGate();
+    const hero = screen.getByRole('region', {name: PROFILE.name});
+    expect(within(hero).getByText(PROFILE.location, {exact: false})).toBeInTheDocument();
+    const about = screen.getByRole('region', {name: 'About me'});
+    expect(within(about).getByText(PROFILE.location)).toBeInTheDocument();
   });
 
   it('does not show a verification badge for an unverified profile', () => {
