@@ -1,3 +1,5 @@
+import {publicUrl} from '../lib/publicUrl';
+
 export const SITE = {
   // Wordmark shown in the header and footer.
   brandName: 'nocturne',
@@ -14,8 +16,8 @@ export const SITE = {
     exitUrl: 'https://www.google.com',
   },
   legal: {
-    privacyUrl: '/privacy.html',
-    termsUrl: '/terms.html',
+    privacyUrl: publicUrl('privacy.html'),
+    termsUrl: publicUrl('terms.html'),
     // Optional contact address shown in the footer. Leave empty to hide it.
     contactEmail: '',
   },

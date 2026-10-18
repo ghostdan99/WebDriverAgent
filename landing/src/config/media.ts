@@ -1,3 +1,5 @@
+import {publicUrl} from '../lib/publicUrl';
+
 // Locked previews. `thumbnail` must point to a low-resolution, pre-blurred image: the browser
 // downloads whatever is linked here, so never reference the full-size original.
 export type MediaKind = 'photo' | 'set' | 'video';
@@ -21,7 +23,7 @@ export const LATEST_POSTS: MediaItem[] = [
   {
     id: 'post-01',
     kind: 'set',
-    thumbnail: `/media/post-01.svg`,
+    thumbnail: publicUrl(`media/post-01.svg`),
     title: 'Golden hour on the rooftop',
     count: 14,
     isNew: true,
@@ -29,23 +31,33 @@ export const LATEST_POSTS: MediaItem[] = [
   {
     id: 'post-02',
     kind: 'video',
-    thumbnail: `/media/post-02.svg`,
+    thumbnail: publicUrl(`media/post-02.svg`),
     title: 'Studio day, behind the scenes',
     duration: '3:42',
   },
-  {id: 'post-03', kind: 'photo', thumbnail: `/media/post-03.svg`, title: 'Morning light in Lisbon'},
+  {
+    id: 'post-03',
+    kind: 'photo',
+    thumbnail: publicUrl(`media/post-03.svg`),
+    title: 'Morning light in Lisbon',
+  },
   {
     id: 'post-04',
     kind: 'set',
-    thumbnail: `/media/post-04.svg`,
+    thumbnail: publicUrl(`media/post-04.svg`),
     title: 'Autumn outfit try-on',
     count: 9,
   },
-  {id: 'post-05', kind: 'photo', thumbnail: `/media/post-05.svg`, title: 'Film roll from Porto'},
+  {
+    id: 'post-05',
+    kind: 'photo',
+    thumbnail: publicUrl(`media/post-05.svg`),
+    title: 'Film roll from Porto',
+  },
   {
     id: 'post-06',
     kind: 'video',
-    thumbnail: `/media/post-06.svg`,
+    thumbnail: publicUrl(`media/post-06.svg`),
     title: 'Voice note and a sunset walk',
     duration: '1:58',
   },
@@ -66,7 +78,7 @@ const PHOTO_TITLES = [
 export const PHOTOS: MediaItem[] = PHOTO_TITLES.map((title, i) => ({
   id: `photo-${pad(i + 1)}`,
   kind: i % 3 === 0 ? 'set' : 'photo',
-  thumbnail: `/media/photo-${pad(i + 1)}.svg`,
+  thumbnail: publicUrl(`media/photo-${pad(i + 1)}.svg`),
   title,
   count: i % 3 === 0 ? 8 + i : undefined,
 }));
@@ -83,7 +95,7 @@ const VIDEO_ITEMS: Array<[string, string]> = [
 export const VIDEOS: MediaItem[] = VIDEO_ITEMS.map(([title, duration], i) => ({
   id: `video-${pad(i + 1)}`,
   kind: 'video',
-  thumbnail: `/media/video-${pad(i + 1)}.svg`,
+  thumbnail: publicUrl(`media/video-${pad(i + 1)}.svg`),
   title,
   duration,
   isNew: i === 0,

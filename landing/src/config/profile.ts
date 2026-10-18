@@ -1,4 +1,5 @@
 import type {AvailabilityConfig} from '../lib/availability';
+import {publicUrl} from '../lib/publicUrl';
 
 export interface ProfileFact {
   icon: 'pin' | 'globe' | 'calendar';
@@ -49,8 +50,8 @@ export const PROFILE: ProfileConfig = {
   chatGreeting:
     "Hey, thanks for stopping by. Tell me where you're writing from, I read every message myself.",
   stats: {photos: 248, videos: 36, likes: 18400},
-  avatar: {src: '/media/avatar.svg', alt: 'Aria Vale'},
-  cover: {src: '/media/cover.svg', alt: ''},
+  avatar: {src: publicUrl('media/avatar.svg'), alt: 'Aria Vale'},
+  cover: {src: publicUrl('media/cover.svg'), alt: ''},
   // Must reflect when the creator is actually available. See lib/availability.ts for modes.
   availability: {
     mode: 'manual',
