@@ -1,0 +1,39 @@
+.layout {
+  display: grid;
+  gap: 40px;
+  margin-top: 36px;
+}
+
+.feed {
+  display: grid;
+  gap: 48px;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    grid-template-rows: auto 1fr;
+    column-gap: 40px;
+    row-gap: 32px;
+    margin-top: 48px;
+  }
+
+  .about {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .feed {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .chat {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--header-h) + 16px);
+  }
+}

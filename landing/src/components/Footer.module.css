@@ -1,0 +1,63 @@
+.footer {
+  margin-top: 64px;
+  border-top: 1px solid var(--line);
+  /* Leaves room for the floating chat button so it never covers footer links. */
+  padding: 32px 0 calc(104px + var(--safe-bottom));
+  color: var(--text-3);
+  font-size: 13.5px;
+}
+
+.inner {
+  display: grid;
+  gap: 18px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-2);
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-style: italic;
+}
+
+.brand svg {
+  color: var(--accent-text);
+}
+
+.disclosure {
+  display: grid;
+  gap: 8px;
+  max-width: 72ch;
+  line-height: 1.6;
+}
+
+.disclosureTitle {
+  color: var(--text-2);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+.links a {
+  padding: 6px 0;
+  color: var(--text-2);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px;
+}
+
+.links a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
+.small {
+  font-size: 12.5px;
+}

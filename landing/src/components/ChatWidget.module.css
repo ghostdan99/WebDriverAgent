@@ -1,0 +1,208 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.avatarWrap {
+  position: relative;
+  flex: none;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--online);
+  box-shadow: 0 0 0 3px var(--bg-raised);
+}
+
+.who {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.status {
+  color: var(--text-3);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status[data-online] {
+  color: var(--online-text);
+}
+
+.close {
+  width: 38px;
+  height: 38px;
+  border-color: transparent;
+  color: var(--text-2);
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 150px;
+  padding: 18px 16px 12px;
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(204, 58, 110, 0.07), transparent 60%), transparent;
+}
+
+.chat[data-variant='floating'] .thread {
+  flex: 1;
+  min-height: 120px;
+  overflow-y: auto;
+}
+
+.sampleLabel {
+  align-self: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-3);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bubbleRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 88%;
+  animation: bubble-in 500ms var(--ease-out) 300ms both;
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.miniAvatar {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.bubble {
+  padding: 10px 14px;
+  border-radius: 18px 18px 18px 6px;
+  background: var(--bg-raised-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0 12px;
+  padding: 6px 6px 6px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  background: var(--bg);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.composer:focus-within {
+  border-color: rgba(255, 141, 179, 0.55);
+  box-shadow: 0 0 0 3px rgba(255, 141, 179, 0.14);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  max-height: 132px;
+  padding: 9px 0;
+  border: 0;
+  background: transparent;
+  /* 16px stops iOS from zooming into the field. */
+  font-size: 16px;
+  line-height: 1.4;
+  resize: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.send {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  transition:
+    background-color 160ms ease,
+    opacity 160ms ease,
+    transform 160ms var(--ease-out);
+}
+
+.send:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.send:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.send:disabled {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-3);
+  cursor: not-allowed;
+}
+
+.footnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 10px 18px 14px;
+  color: var(--text-3);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.footnote svg {
+  flex: none;
+  margin-top: 2px;
+}

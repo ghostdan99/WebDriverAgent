@@ -6,6 +6,7 @@ export default [
     ignores: [
       'Configurations/**',
       'Fastlane/**',
+      'landing/**',
       'PrivateHeaders/**',
       'WebDriverAgent*/**'
     ],

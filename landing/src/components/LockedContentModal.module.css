@@ -1,0 +1,88 @@
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-2);
+}
+
+.close:hover {
+  color: var(--text);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 24px 22px;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .content {
+    padding: 40px 36px 26px;
+  }
+}
+
+.visual {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: blur(1.5px) saturate(0.9);
+  box-shadow: 0 0 0 4px var(--bg-raised-2);
+}
+
+.badge {
+  position: absolute;
+  right: -6px;
+  bottom: -4px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 4px var(--bg-raised-2);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.body {
+  margin-top: 12px;
+  color: var(--text-2);
+  font-size: 15px;
+  text-wrap: pretty;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.disclosure {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  color: var(--text-3);
+  font-size: 12.5px;
+}
