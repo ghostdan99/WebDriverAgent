@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500" preserveAspectRatio="xMidYMid slice">
 <defs>
-<linearGradient id="g" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#2a1c1c"/><stop offset="1" stop-color="#110c0d"/></linearGradient>
+<linearGradient id="g" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#f9ece5"/><stop offset="1" stop-color="#ecd9d3"/></linearGradient>
 <filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="34"/></filter>
 </defs>
 <rect width="400" height="500" fill="url(#g)"/>
-<g filter="url(#b)"><ellipse cx="275.2" cy="272" rx="150.7" ry="198.1" fill="#f7d2b6" opacity="0.6"/><ellipse cx="274.3" cy="401.1" rx="118.9" ry="82.2" fill="#7c4b6e" opacity="0.7"/><ellipse cx="325" cy="405.3" rx="145.1" ry="173.4" fill="#d1667f" opacity="0.6"/><ellipse cx="42.3" cy="228.7" rx="140.1" ry="183.2" fill="#d1667f" opacity="0.5"/><ellipse cx="260.3" cy="180" rx="44" ry="50" fill="#7c4b6e" opacity="0.85"/><ellipse cx="260.3" cy="390" rx="96" ry="170" fill="#d1667f" opacity="0.7"/></g>
+<g filter="url(#b)"><ellipse cx="275.2" cy="272" rx="150.7" ry="198.1" fill="#f9dcc8" opacity="0.6"/><ellipse cx="274.3" cy="401.1" rx="118.9" ry="82.2" fill="#b27a97" opacity="0.7"/><ellipse cx="325" cy="405.3" rx="145.1" ry="173.4" fill="#de7f98" opacity="0.6"/><ellipse cx="42.3" cy="228.7" rx="140.1" ry="183.2" fill="#de7f98" opacity="0.5"/><ellipse cx="260.3" cy="180" rx="44" ry="50" fill="#b27a97" opacity="0.85"/><ellipse cx="260.3" cy="390" rx="96" ry="170" fill="#de7f98" opacity="0.7"/></g>
 </svg>

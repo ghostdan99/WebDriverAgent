@@ -9,9 +9,9 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
   padding: 4px;
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
-  background: var(--bg-raised);
+  background: var(--bg-raised-2);
 }
 
 @media (min-width: 640px) {
@@ -28,9 +28,9 @@
   left: 4px;
   width: calc(50% - 4px);
   border-radius: var(--radius-pill);
-  background: var(--bg-raised-2);
-  border: 1px solid var(--line-strong);
-  box-shadow: 0 6px 18px -10px rgba(0, 0, 0, 0.8);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
   transform: translateX(calc(var(--active, 0) * 100%));
   transition: transform 320ms var(--ease-out);
 }
@@ -84,8 +84,8 @@
   border-radius: var(--radius-lg);
   background: linear-gradient(
     120deg,
-    rgba(204, 58, 110, 0.12),
-    rgba(181, 151, 255, 0.06) 60%,
+    rgba(204, 58, 110, 0.08),
+    rgba(97, 65, 184, 0.05) 60%,
     transparent
   );
 }

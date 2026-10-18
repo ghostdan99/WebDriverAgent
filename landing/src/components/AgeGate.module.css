@@ -30,7 +30,7 @@
   width: 64px;
   height: 64px;
   margin: 22px 0 16px;
-  border: 1px solid rgba(255, 141, 179, 0.35);
+  border: 1px solid rgba(204, 58, 110, 0.3);
   border-radius: 50%;
   background: var(--accent-soft);
   color: var(--accent-text);

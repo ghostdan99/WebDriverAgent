@@ -10,7 +10,7 @@
 }
 
 .header[data-scrolled] {
-  background: rgba(11, 10, 13, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   border-bottom-color: var(--line);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);

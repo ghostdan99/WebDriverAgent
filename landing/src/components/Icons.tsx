@@ -143,7 +143,7 @@ export const VerifiedIcon = ({size = 20, ...rest}: IconProps) => (
     <path
       d="m8.6 12.2 2.3 2.3 4.6-4.8"
       fill="none"
-      stroke="#0b0a0d"
+      stroke="#fff"
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"

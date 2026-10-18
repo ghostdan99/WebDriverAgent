@@ -10,7 +10,7 @@
   gap: 12px;
   padding: 14px 16px;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-raised);
 }
 
 .avatarWrap {
@@ -84,7 +84,7 @@
   align-self: center;
   padding: 3px 10px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--fill);
   color: var(--text-3);
   font-size: 11.5px;
   font-weight: 700;
@@ -139,8 +139,8 @@
 }
 
 .composer:focus-within {
-  border-color: rgba(255, 141, 179, 0.55);
-  box-shadow: 0 0 0 3px rgba(255, 141, 179, 0.14);
+  border-color: rgba(204, 58, 110, 0.5);
+  box-shadow: 0 0 0 3px rgba(204, 58, 110, 0.12);
 }
 
 .input {
@@ -187,7 +187,7 @@
 }
 
 .send:disabled {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--fill-strong);
   color: var(--text-3);
   cursor: not-allowed;
 }

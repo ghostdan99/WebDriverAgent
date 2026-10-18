@@ -1,27 +1,29 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg: #0b0a0d;
-  --bg-raised: #131217;
-  --bg-raised-2: #1a1920;
-  --bg-overlay: rgba(8, 7, 10, 0.72);
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.14);
+  --bg: #ffffff;
+  --bg-raised: #ffffff;
+  --bg-raised-2: #f4f2f5;
+  --bg-overlay: rgba(23, 18, 28, 0.42);
+  --fill: rgba(23, 18, 28, 0.05);
+  --fill-strong: rgba(23, 18, 28, 0.09);
+  --line: rgba(23, 18, 28, 0.09);
+  --line-strong: rgba(23, 18, 28, 0.16);
 
-  --text: #f5f2f4;
-  --text-2: #c3bdc6;
-  --text-3: #948e9a;
+  --text: #17141b;
+  --text-2: #48434e;
+  --text-3: #6e6875;
 
   --accent: #cc3a6e;
   --accent-hover: #b9305f;
   --accent-press: #a62a55;
-  --accent-text: #ff8db3;
-  --accent-soft: rgba(255, 141, 179, 0.12);
-  --plum-soft: rgba(181, 151, 255, 0.12);
-  --plum-text: #c7b3ff;
-  --online: #3fd68a;
-  --online-text: #74e6aa;
-  --focus: #ffa3c4;
+  --accent-text: #c0306a;
+  --accent-soft: rgba(204, 58, 110, 0.09);
+  --plum-soft: rgba(97, 65, 184, 0.08);
+  --plum-text: #6141b8;
+  --online: #22b56e;
+  --online-text: #0f7d4a;
+  --focus: #cc3a6e;
 
   --radius-xl: 28px;
   --radius-lg: 22px;
@@ -29,7 +31,8 @@
   --radius-sm: 12px;
   --radius-pill: 999px;
 
-  --shadow-lg: 0 24px 64px -24px rgba(0, 0, 0, 0.75);
+  --shadow-lg: 0 24px 60px -24px rgba(40, 20, 50, 0.28);
+  --shadow-sm: 0 1px 2px rgba(23, 18, 28, 0.06), 0 4px 14px -6px rgba(23, 18, 28, 0.14);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Native app fonts: SF Pro on Apple devices, Roboto on Android, Segoe UI on Windows. */
@@ -120,7 +123,7 @@ p {
 }
 
 ::selection {
-  background: rgba(255, 141, 179, 0.35);
+  background: rgba(204, 58, 110, 0.18);
 }
 
 .sr-only {
@@ -217,7 +220,7 @@ p {
   color: #fff;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 10px 28px -14px rgba(204, 58, 110, 0.9);
+    0 10px 24px -14px rgba(204, 58, 110, 0.7);
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -229,14 +232,14 @@ p {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg);
   border-color: var(--line-strong);
   color: var(--text);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: var(--fill);
+  border-color: rgba(23, 18, 28, 0.24);
 }
 
 .btn-ghost {
@@ -246,7 +249,7 @@ p {
 
 .btn-ghost:hover:not(:disabled) {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--fill);
 }
 
 .icon-btn {
@@ -258,7 +261,7 @@ p {
   padding: 0;
   border: 1px solid var(--line-strong);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg);
   color: var(--text);
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -267,7 +270,7 @@ p {
 }
 
 .icon-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--fill);
 }
 
 .icon-btn:active {
@@ -338,8 +341,8 @@ p {
   gap: 6px;
   padding: 6px 12px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--line);
+  background: var(--fill);
+  border: 1px solid transparent;
   color: var(--text-2);
   font-size: 13px;
   font-weight: 600;
@@ -351,7 +354,7 @@ p {
   align-items: center;
   padding: 3px 8px;
   border-radius: var(--radius-pill);
-  border: 1px dashed rgba(199, 179, 255, 0.45);
+  border: 1px dashed rgba(97, 65, 184, 0.4);
   color: var(--plum-text);
   font-size: 11px;
   font-weight: 700;

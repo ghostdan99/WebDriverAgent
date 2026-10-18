@@ -23,8 +23,8 @@
   max-width: 420px;
   max-height: calc(100dvh - 32px);
   overflow-y: auto;
-  background: linear-gradient(180deg, #1b1a21 0%, var(--bg-raised) 100%);
-  border: 1px solid var(--line-strong);
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   animation: dialog-in 280ms var(--ease-out) both;
