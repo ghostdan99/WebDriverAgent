@@ -17,9 +17,9 @@
   align-items: center;
   gap: 8px;
   color: var(--text-2);
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .brand svg {

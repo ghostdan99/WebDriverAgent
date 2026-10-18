@@ -86,7 +86,7 @@ function avatar() {
 <radialGradient id="a" cx="0.3" cy="0.25" r="0.9"><stop offset="0" stop-color="#f0a7bd"/><stop offset="0.5" stop-color="#b8648a"/><stop offset="1" stop-color="#4c2f5e"/></radialGradient>
 </defs>
 <rect width="320" height="320" fill="url(#a)"/>
-<text x="160" y="196" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="128" fill="#fff7f9" letter-spacing="-4">av</text>
+<text x="160" y="199" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="600" font-size="112" fill="#fff7f9" letter-spacing="-2">AV</text>
 </svg>
 `;
 }
