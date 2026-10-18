@@ -1,4 +1,5 @@
 import {type CSSProperties, type KeyboardEvent, useId, useRef, useState} from 'react';
+import {COPY} from '../config/copy';
 import {type MediaItem, PHOTOS, VIDEOS} from '../config/media';
 import {PROFILE} from '../config/profile';
 import {useRegistration} from '../context/registration';
@@ -116,14 +117,14 @@ export function ContentTabs() {
             {formatCount(PROFILE.stats.photos)} photos and {formatCount(PROFILE.stats.videos)}{' '}
             videos
           </strong>{' '}
-          are waiting on the full profile.
+          are waiting on the full profile. {COPY.signupNote}.
         </p>
         <AffiliateLink
           placement="media_join"
           intent="join"
           className={`btn btn-primary ${styles.unlockButton}`}
         >
-          Join to view
+          {COPY.joinToView}
         </AffiliateLink>
       </div>
     </section>

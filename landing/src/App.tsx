@@ -8,12 +8,11 @@ import {Footer} from './components/Footer';
 import {Header} from './components/Header';
 import {LatestPosts} from './components/LatestPosts';
 import {LockedContentModal} from './components/LockedContentModal';
-import {ProfileBio} from './components/ProfileBio';
 import {ProfileHero} from './components/ProfileHero';
 import {Toast} from './components/Toast';
 import {PROFILE} from './config/profile';
 import {RegistrationContext} from './context/registration';
-import {useAvailability} from './hooks/useAvailability';
+import {usePresence} from './hooks/usePresence';
 import {useInView} from './hooks/useInView';
 import {isPlaceholderAffiliateUrl} from './lib/affiliate';
 import {initAnalytics, type RegistrationReason, track} from './lib/analytics';
@@ -23,7 +22,7 @@ export function App() {
   const [ageConfirmed, setAgeConfirmed] = useState(() => isAgeConfirmed(readStorage));
   const [reason, setReason] = useState<RegistrationReason | null>(null);
   const [toast, setToast] = useState<string | null>(null);
-  const available = useAvailability(PROFILE.availability);
+  const presence = usePresence(PROFILE.availability);
   const chatRef = useRef<HTMLElement>(null);
   const chatInView = useInView(chatRef, '0px 0px -80px 0px');
   const viewTracked = useRef(false);
@@ -65,12 +64,9 @@ export function App() {
       <Header />
 
       <main id="main" className="container">
-        <ProfileHero active={ageConfirmed} available={available} onNotify={setToast} />
+        <ProfileHero active={ageConfirmed} presence={presence} onNotify={setToast} />
 
         <div className={styles.layout}>
-          <div className={styles.about}>
-            <ProfileBio />
-          </div>
           <div className={styles.feed}>
             <LatestPosts />
             <ContentTabs />
@@ -84,14 +80,14 @@ export function App() {
                 <p className="section-sub">Say hi to {PROFILE.name.split(' ')[0]}</p>
               </div>
             </div>
-            <ChatWidget available={available} />
+            <ChatWidget presence={presence} />
           </section>
         </div>
       </main>
 
       <Footer />
 
-      <FloatingChatButton available={available} hidden={!ageConfirmed || chatInView} />
+      <FloatingChatButton presence={presence} hidden={!ageConfirmed || chatInView} />
       <LockedContentModal reason={reason} onClose={closeRegistration} />
       <AgeGate open={!ageConfirmed} onConfirm={confirmAge} />
       <Toast message={toast} onDone={clearToast} />

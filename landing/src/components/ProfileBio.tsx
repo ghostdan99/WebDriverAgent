@@ -1,15 +1,9 @@
 import {useId, useLayoutEffect, useRef, useState} from 'react';
-import {type ProfileFact, PROFILE} from '../config/profile';
+import {PROFILE} from '../config/profile';
 import {track} from '../lib/analytics';
-import {CalendarIcon, GlobeIcon, PinIcon} from './Icons';
 import styles from './ProfileBio.module.css';
 
-const FACT_ICONS: Record<ProfileFact['icon'], typeof PinIcon> = {
-  pin: PinIcon,
-  globe: GlobeIcon,
-  calendar: CalendarIcon,
-};
-
+/** The profile bio under the name: a few lines, expandable with Read more / Show less. */
 export function ProfileBio() {
   const bioId = useId();
   const clipRef = useRef<HTMLDivElement>(null);
@@ -17,6 +11,7 @@ export function ProfileBio() {
   const [expanded, setExpanded] = useState(false);
   const [fullHeight, setFullHeight] = useState(0);
   const [overflows, setOverflows] = useState(true);
+  const paragraphs = [PROFILE.tagline, ...PROFILE.bio];
 
   // Measure the full text so the expand animation has a real target height, and hide the toggle
   // when the bio already fits in the collapsed lines.
@@ -43,10 +38,6 @@ export function ProfileBio() {
     return () => observer.disconnect();
   }, []);
 
-  const facts: ProfileFact[] = PROFILE.location
-    ? [{icon: 'pin', label: PROFILE.location}, ...PROFILE.facts]
-    : PROFILE.facts;
-
   const toggle = () => {
     if (!expanded) {
       track('bio_expand', {profile: PROFILE.handle});
@@ -55,11 +46,7 @@ export function ProfileBio() {
   };
 
   return (
-    <section className={`card ${styles.about}`} aria-labelledby="about-title">
-      <h2 id="about-title" className={styles.title}>
-        About me
-      </h2>
-
+    <div className={styles.bio}>
       <div
         ref={clipRef}
         id={bioId}
@@ -69,7 +56,7 @@ export function ProfileBio() {
         style={expanded ? {maxHeight: fullHeight > 0 ? fullHeight : 'none'} : undefined}
       >
         <div ref={innerRef} className={styles.text}>
-          {PROFILE.bio.map((paragraph) => (
+          {paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
@@ -85,27 +72,6 @@ export function ProfileBio() {
           {expanded ? 'Show less' : 'Read more'}
         </button>
       )}
-
-      <ul className={styles.facts}>
-        {facts.map((fact) => {
-          const Icon = FACT_ICONS[fact.icon];
-          return (
-            <li key={fact.label}>
-              <Icon size={18} />
-              {fact.label}
-            </li>
-          );
-        })}
-      </ul>
-
-      <h3 className={styles.subTitle}>On my page</h3>
-      <ul className={styles.tags} aria-label="Content on this profile">
-        {PROFILE.contentTypes.map((type) => (
-          <li key={type} className="chip">
-            {type}
-          </li>
-        ))}
-      </ul>
-    </section>
+    </div>
   );
 }

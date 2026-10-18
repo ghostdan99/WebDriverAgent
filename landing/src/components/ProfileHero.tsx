@@ -1,10 +1,12 @@
 import {useEffect, useState} from 'react';
+import {COPY} from '../config/copy';
 import {PROFILE} from '../config/profile';
-import {SITE} from '../config/site';
 import {useRegistration} from '../context/registration';
+import type {Presence} from '../lib/availability';
 import {shareLink} from '../lib/share';
 import {AffiliateLink} from './AffiliateLink';
-import {LockIcon, PinIcon, PlusIcon, ShareIcon, VerifiedIcon} from './Icons';
+import {CheckIcon, LockIcon, PinIcon, PlusIcon, ShareIcon, VerifiedIcon} from './Icons';
+import {ProfileBio} from './ProfileBio';
 import {ProfileStats} from './ProfileStats';
 import styles from './ProfileHero.module.css';
 
@@ -13,15 +15,13 @@ const STATUS_DELAY_MS = 1200;
 interface ProfileHeroProps {
   // False while the age gate is still covering the page; the status reveal waits for it.
   active: boolean;
-  available: boolean;
+  presence: Presence;
   onNotify: (message: string) => void;
 }
 
-export function ProfileHero({active, available, onNotify}: ProfileHeroProps) {
+export function ProfileHero({active, presence, onNotify}: ProfileHeroProps) {
   const openRegistration = useRegistration();
   const [statusShown, setStatusShown] = useState(false);
-  const {availability} = PROFILE;
-  const offlineLabel = availability.mode === 'hidden' ? undefined : availability.offlineLabel;
 
   useEffect(() => {
     if (!active) {
@@ -69,7 +69,7 @@ export function ProfileHero({active, available, onNotify}: ProfileHeroProps) {
               fetchPriority="high"
               decoding="async"
             />
-            {available && (
+            {presence.available && (
               <span
                 className={styles.presence}
                 data-visible={statusShown || undefined}
@@ -111,19 +111,19 @@ export function ProfileHero({active, available, onNotify}: ProfileHeroProps) {
               {PROFILE.location}
             </span>
           )}
-          {availability.mode !== 'hidden' &&
-            (available ? (
-              <span className={styles.status} data-visible={statusShown || undefined}>
-                <span className={styles.statusDot} aria-hidden="true" />
-                Available now
-              </span>
-            ) : (
-              offlineLabel && <span className={styles.offline}>{offlineLabel}</span>
-            ))}
-          {SITE.isDemo && <span className="demo-badge">Demo profile</span>}
+          {presence.label && (
+            <span
+              className={styles.status}
+              data-online={presence.available || undefined}
+              data-visible={statusShown || undefined}
+            >
+              <span className={styles.statusDot} aria-hidden="true" />
+              {presence.label}
+            </span>
+          )}
         </div>
 
-        <p className={styles.tagline}>{PROFILE.tagline}</p>
+        <ProfileBio />
 
         <ProfileStats />
 
@@ -134,9 +134,12 @@ export function ProfileHero({active, available, onNotify}: ProfileHeroProps) {
             className={`btn btn-primary ${styles.ctaButton}`}
             icon={<LockIcon size={18} />}
           >
-            Unlock full profile
+            {COPY.unlockProfile}
           </AffiliateLink>
-          <p className={styles.ctaNote}>Account on {SITE.platformName} required</p>
+          <p className={styles.ctaNote}>
+            <CheckIcon size={16} />
+            {COPY.signupNote}
+          </p>
         </div>
       </div>
     </section>

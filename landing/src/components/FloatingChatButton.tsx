@@ -1,17 +1,18 @@
 import {type CSSProperties, useEffect, useId, useRef, useState} from 'react';
 import {PROFILE} from '../config/profile';
 import {useKeyboardInset} from '../hooks/useKeyboardInset';
+import type {Presence} from '../lib/availability';
 import {ChatWidget} from './ChatWidget';
 import {ChatIcon, CloseIcon} from './Icons';
 import styles from './FloatingChatButton.module.css';
 
 interface FloatingChatButtonProps {
-  available: boolean;
+  presence: Presence;
   // Hidden while the inline chat is on screen or an overlay covers the page.
   hidden: boolean;
 }
 
-export function FloatingChatButton({available, hidden}: FloatingChatButtonProps) {
+export function FloatingChatButton({presence, hidden}: FloatingChatButtonProps) {
   const panelId = useId();
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -51,12 +52,7 @@ export function FloatingChatButton({available, hidden}: FloatingChatButtonProps)
             }
           }}
         >
-          <ChatWidget
-            variant="floating"
-            available={available}
-            onClose={close}
-            inputRef={inputRef}
-          />
+          <ChatWidget variant="floating" presence={presence} onClose={close} inputRef={inputRef} />
         </div>
       )}
       <button
@@ -69,7 +65,7 @@ export function FloatingChatButton({available, hidden}: FloatingChatButtonProps)
         onClick={() => (open ? close() : setOpen(true))}
       >
         {open ? <CloseIcon size={22} /> : <ChatIcon size={24} />}
-        {available && !open && <span className={styles.fabDot} aria-hidden="true" />}
+        {presence.available && !open && <span className={styles.fabDot} aria-hidden="true" />}
       </button>
     </div>
   );

@@ -12,23 +12,6 @@ export function Footer() {
           <span>{SITE.brandName}</span>
         </div>
 
-        <section className={styles.disclosure} aria-labelledby="affiliate-disclosure">
-          <h2 id="affiliate-disclosure" className={styles.disclosureTitle}>
-            Affiliate disclosure
-          </h2>
-          <p>
-            This page contains affiliate links. If you create an account through them, the creator
-            of this page may earn a commission at no extra cost to you. Accounts, chat and
-            subscriptions are provided by {SITE.platformName}, not by this website, and are subject
-            to its own terms.
-          </p>
-          {SITE.isDemo && (
-            <p>
-              Profile details, figures and images on this page are placeholders for demonstration.
-            </p>
-          )}
-        </section>
-
         <nav aria-label="Legal" className={styles.links}>
           <a href={legal.privacyUrl}>Privacy policy</a>
           <a href={legal.termsUrl}>Terms</a>

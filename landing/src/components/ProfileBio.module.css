@@ -1,24 +1,14 @@
-.about {
-  padding: 22px 20px;
-}
-
-@media (min-width: 640px) {
-  .about {
-    padding: 26px 26px 24px;
-  }
-}
-
-.title {
-  margin-bottom: 12px;
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.25;
+.bio {
+  max-width: 62ch;
+  margin: 14px 0 20px;
 }
 
 .clip {
-  --lh: 1.65em;
+  --lh: 1.6em;
+  --gap: 0.75em;
   position: relative;
-  max-height: calc(var(--lh) * 3);
+  /* Three lines plus one paragraph gap, so the third line is never cut in half. */
+  max-height: calc(var(--lh) * 3 + var(--gap));
   overflow: hidden;
   transition: max-height 420ms var(--ease-out);
 }
@@ -30,52 +20,19 @@
 
 .text {
   display: grid;
-  gap: 0.8em;
+  gap: var(--gap);
   color: var(--text-2);
-  font-size: 15.5px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .text {
+    font-size: 16.5px;
+  }
 }
 
 .toggle {
-  margin-top: 6px;
-}
-
-.facts {
-  display: grid;
-  gap: 10px;
-  margin: 18px 0 0;
-  padding: 18px 0 0;
-  list-style: none;
-  border-top: 1px solid var(--line);
-  color: var(--text-2);
-  font-size: 14.5px;
-}
-
-.facts li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.facts svg {
-  color: var(--text-3);
-  flex: none;
-}
-
-.subTitle {
-  margin: 20px 0 10px;
-  color: var(--text-3);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  margin-top: 2px;
 }

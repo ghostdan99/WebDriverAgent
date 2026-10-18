@@ -34,7 +34,8 @@ S3 + CDN, nginx).
 | Miniatury galerii | `src/config/media.ts` + pliki w `public/media/` |
 | Polityka prywatności i regulamin | `public/privacy.html`, `public/terms.html` (to tylko szablony) |
 | GA4 | zmienna `VITE_GA_MEASUREMENT_ID` (opcjonalnie) |
-| Tryb demo | po podmianie wszystkich danych ustaw `SITE.isDemo = false` |
+| Teksty „free” | `SITE.freeSignup` (rejestracja za darmo) i `SITE.freeUnlock` (odblokowanie profilu za darmo) w `src/config/site.ts`. Ustaw `false`, jeśli na platformie to nie jest prawda |
+| Statystyki (zdjęcia, wideo, polubienia) | `PROFILE.stats`. Strona nie oznacza ich już jako przykładowych, więc wpisz prawdziwe liczby |
 
 Zmienne środowiskowe ustawiasz w `.env.local` (wzór w `.env.example`) albo w panelu hostingu.
 Trafiają do publicznego bundla JS, więc nie umieszczaj w nich sekretów. Strona i tak żadnych
@@ -42,8 +43,8 @@ nie potrzebuje.
 
 ### Link afiliacyjny
 
-Każdy przycisk „Join”, „Log in”, „Create account”, „Register to chat”, „Unlock full profile”,
-„Join to view” i „See all” jest renderowany przez `components/AffiliateLink.tsx`. Ten komponent
+Każdy przycisk „Join free”, „Log in”, „Create free account”, „Register free to chat”,
+„Unlock full profile for free”, „Join free to view” i „See all” jest renderowany przez `components/AffiliateLink.tsx`. Ten komponent
 buduje adres przez `buildAffiliateUrl()` z `lib/affiliate.ts`, a ta funkcja czyta
 `AFFILIATE_URL`. Test `src/test/single-source.test.ts` pilnuje, żeby link nie był zdefiniowany
 nigdzie indziej.
@@ -52,26 +53,33 @@ nigdzie indziej.
 - UTM i SubID są dopisywane tylko wtedy, gdy są włączone i gdy link ich jeszcze nie zawiera.
 - `forwardParams` przekazuje wybrane parametry z adresu landing page'a, np. `?subid=tiktok`,
   do linku afiliacyjnego.
-- Linki mają `rel="sponsored"`. Informacja o relacji afiliacyjnej jest w stopce i w każdym
-  modalu rejestracji.
+- Linki mają `rel="sponsored"`. Widocznej informacji o afiliacji na stronie nie ma; sprawdź,
+  czy wymaga jej regulamin programu partnerskiego i prawo kraju, w którym promujesz stronę.
 
-### Status „Available now”
+### Status „Available now” / „Active 5 min ago”
 
-Status nie powinien udawać aktywności. Do wyboru są trzy tryby:
+Status pokazuje zielone „Available now”, gdy twórczyni jest dostępna, a poza tym szare
+„Active 5 min ago”, „Active 2 h ago” itd. Do wyboru są trzy tryby:
 
 ```ts
-availability: {mode: 'manual', available: true, offlineLabel: 'Usually replies in the evening'}
+// Godziny dostępności. Poza nimi czas liczy się od końca ostatniego okna.
 availability: {
   mode: 'schedule',
   timeZone: 'Europe/Lisbon',
-  windows: [{days: [1, 2, 3, 4, 5], from: '19:00', to: '23:00'}],
-  offlineLabel: 'Usually replies in the evening',
+  windows: [
+    {days: [0, 1, 2, 3, 4, 5, 6], from: '10:00', to: '13:00'},
+    {days: [0, 1, 2, 3, 4, 5, 6], from: '18:00', to: '01:00'},
+  ],
 }
+// Ręczny przełącznik. lastActiveAt (data ISO) daje „Active … ago”, gdy available = false.
+availability: {mode: 'manual', available: false, lastActiveAt: '2026-10-18T20:15:00+01:00'}
+// Bez statusu.
 availability: {mode: 'hidden'}
 ```
 
-W trybie `schedule` status sam przełącza się co minutę. Napis pojawia się ok. 1,2 s po
-wyświetleniu profilu, czyli po zamknięciu age gate'u.
+Status odświeża się co minutę. Ustaw okna tak, żeby odpowiadały godzinom, w których twórczyni
+faktycznie odpisuje. Napis pojawia się ok. 1,2 s po wyświetleniu profilu, czyli po zamknięciu
+age gate'u.
 
 ### Zdjęcia i wideo
 

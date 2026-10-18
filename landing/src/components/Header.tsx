@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {COPY} from '../config/copy';
 import {SITE} from '../config/site';
 import {AffiliateLink} from './AffiliateLink';
 import {BrandMark} from './Icons';
@@ -26,7 +27,7 @@ export function Header() {
             Log in
           </AffiliateLink>
           <AffiliateLink placement="header_join" intent="join" className="btn btn-primary btn-sm">
-            Join
+            {COPY.join}
           </AffiliateLink>
         </nav>
       </div>

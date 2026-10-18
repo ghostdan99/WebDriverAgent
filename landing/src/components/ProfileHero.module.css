@@ -81,13 +81,13 @@
 
 .presence {
   position: absolute;
-  right: 7%;
-  bottom: 7%;
-  width: 18px;
-  height: 18px;
+  right: 9%;
+  bottom: 9%;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--online);
-  box-shadow: 0 0 0 4px var(--bg);
+  box-shadow: 0 0 0 3px var(--bg);
   opacity: 0;
   transform: scale(0.4);
   transition:
@@ -97,8 +97,8 @@
 
 @media (min-width: 640px) {
   .presence {
-    width: 22px;
-    height: 22px;
+    width: 15px;
+    height: 15px;
   }
 }
 
@@ -195,16 +195,12 @@
   color: var(--text-3);
 }
 
-.status,
-.offline {
+.status {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   font-weight: 600;
-}
-
-.status {
-  color: var(--online-text);
+  color: var(--text-3);
   opacity: 0;
   transform: translateY(3px);
   transition:
@@ -217,29 +213,21 @@
   transform: none;
 }
 
+.status[data-online] {
+  color: var(--online-text);
+}
+
 .statusDot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
+  background: var(--text-3);
+  opacity: 0.6;
+}
+
+.status[data-online] .statusDot {
   background: var(--online);
-}
-
-.offline {
-  color: var(--text-3);
-}
-
-.tagline {
-  max-width: 56ch;
-  margin: 14px 0 20px;
-  color: var(--text-2);
-  font-size: 16px;
-  text-wrap: pretty;
-}
-
-@media (min-width: 640px) {
-  .tagline {
-    font-size: 17px;
-  }
+  opacity: 1;
 }
 
 .cta {
@@ -256,9 +244,17 @@
 }
 
 .ctaNote {
-  color: var(--text-3);
-  font-size: 13px;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-2);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.ctaNote svg {
+  color: var(--online-text);
 }
 
 @media (min-width: 640px) {
@@ -274,6 +270,6 @@
   }
 
   .ctaNote {
-    text-align: left;
+    justify-content: flex-start;
   }
 }

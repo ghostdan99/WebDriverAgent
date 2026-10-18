@@ -3,11 +3,13 @@ import {publicUrl} from '../lib/publicUrl';
 export const SITE = {
   // Wordmark shown in the header and footer.
   brandName: 'nocturne',
-  // Name of the platform the affiliate link leads to, used in modal and disclosure copy.
+  // Name of the platform the affiliate link leads to, used in modal copy.
   platformName: 'our partner platform',
-  // While true, the page labels the profile figures and status as sample data. Set to false
-  // only after every value in config/profile.ts and config/media.ts is real.
-  isDemo: true,
+  // Creating an account on the platform costs nothing, so CTAs say "Join free" and similar.
+  freeSignup: true,
+  // The creator's profile can be unlocked without paying. Set to false if the subscription is paid,
+  // otherwise the page promises something the platform does not offer.
+  freeUnlock: true,
   ageGate: {
     // Keep enabled whenever the linked platform hosts adult content.
     enabled: true,

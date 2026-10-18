@@ -1,3 +1,4 @@
+import {COPY} from '../config/copy';
 import {LATEST_POSTS, type MediaItem} from '../config/media';
 import {PROFILE} from '../config/profile';
 import {useRegistration} from '../context/registration';
@@ -22,7 +23,7 @@ export function LatestPosts() {
             Latest posts
           </h2>
           <p className="section-sub">
-            {LATEST_POSTS.length} of {total} posts. Tap any post to unlock it.
+            {LATEST_POSTS.length} of {total} posts. Tap any post to unlock it{COPY.forFree}.
           </p>
         </div>
         <AffiliateLink placement="posts_see_all" intent="join" className="text-link">

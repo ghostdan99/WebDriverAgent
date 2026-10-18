@@ -1,22 +1,19 @@
 import type {RefObject} from 'react';
+import {COPY} from '../config/copy';
 import {PROFILE} from '../config/profile';
-import {SITE} from '../config/site';
+import type {Presence} from '../lib/availability';
 import {ChatComposer} from './ChatComposer';
 import {CloseIcon, LockIcon} from './Icons';
 import styles from './ChatWidget.module.css';
 
 interface ChatWidgetProps {
-  available: boolean;
+  presence: Presence;
   variant?: 'inline' | 'floating';
   onClose?: () => void;
   inputRef?: RefObject<HTMLTextAreaElement | null>;
 }
 
-export function ChatWidget({available, variant = 'inline', onClose, inputRef}: ChatWidgetProps) {
-  const {availability} = PROFILE;
-  const showStatus = availability.mode !== 'hidden';
-  const offlineLabel = availability.mode === 'hidden' ? undefined : availability.offlineLabel;
-
+export function ChatWidget({presence, variant = 'inline', onClose, inputRef}: ChatWidgetProps) {
   return (
     <div className={`card ${styles.chat}`} data-variant={variant}>
       <div className={styles.head}>
@@ -29,13 +26,13 @@ export function ChatWidget({available, variant = 'inline', onClose, inputRef}: C
             className={styles.avatar}
             loading="lazy"
           />
-          {showStatus && available && <span className={styles.dot} aria-hidden="true" />}
+          {presence.available && <span className={styles.dot} aria-hidden="true" />}
         </div>
         <div className={styles.who}>
           <p className={styles.name}>{PROFILE.name}</p>
-          {showStatus && (
-            <p className={styles.status} data-online={available || undefined}>
-              {available ? 'Available now' : (offlineLabel ?? `Replies on ${SITE.platformName}`)}
+          {presence.label && (
+            <p className={styles.status} data-online={presence.available || undefined}>
+              {presence.label}
             </p>
           )}
         </div>
@@ -52,7 +49,6 @@ export function ChatWidget({available, variant = 'inline', onClose, inputRef}: C
       </div>
 
       <div className={styles.thread}>
-        <p className={styles.sampleLabel}>Sample message</p>
         <div className={styles.bubbleRow}>
           <img
             src={PROFILE.avatar.src}
@@ -69,7 +65,7 @@ export function ChatWidget({available, variant = 'inline', onClose, inputRef}: C
       <ChatComposer source={variant} inputRef={inputRef} />
       <p className={styles.footnote}>
         <LockIcon size={13} />
-        Chat happens on {SITE.platformName}. Nothing you type here is sent or stored.
+        {COPY.chatNote}
       </p>
     </div>
   );

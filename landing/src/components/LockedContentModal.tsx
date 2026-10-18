@@ -1,9 +1,10 @@
 import {useId, useState} from 'react';
+import {COPY} from '../config/copy';
 import {PROFILE} from '../config/profile';
 import {SITE} from '../config/site';
 import type {RegistrationReason} from '../lib/analytics';
 import {AffiliateLink} from './AffiliateLink';
-import {ArrowUpRightIcon, ChatIcon, CloseIcon, LockIcon, PlusIcon} from './Icons';
+import {ChatIcon, CloseIcon, LockIcon, PlusIcon} from './Icons';
 import {Modal} from './Modal';
 import styles from './LockedContentModal.module.css';
 
@@ -20,20 +21,20 @@ function copyFor(reason: RegistrationReason): Copy {
     case 'chat':
       return {
         title: `Chat with ${name} on ${platform}`,
-        body: `You need an account on ${platform} to start a conversation. Your message has not been sent: nothing you type on this page leaves your device.`,
-        join: 'Register to chat',
+        body: `Create ${COPY.anAccount} on ${platform} to start a conversation. Your message has not been sent yet.`,
+        join: COPY.registerToChat,
       };
     case 'follow':
       return {
         title: `Follow ${name} on ${platform}`,
-        body: `Following and new-post notifications are handled on ${platform}. Create an account or log in there to follow ${name}.`,
-        join: 'Create account',
+        body: `Following and new-post notifications are handled on ${platform}. Create ${COPY.anAccount} to follow ${name}.`,
+        join: COPY.createAccount,
       };
     default:
       return {
         title: 'This content is locked',
-        body: `${name}'s full photo sets, videos and messages are available on ${platform}. Create an account or log in there to unlock the full profile.`,
-        join: 'Create account',
+        body: `${name}'s full photo sets, videos and messages are on ${platform}. Create ${COPY.anAccount} to unlock the full profile${COPY.forFree}.`,
+        join: COPY.createAccount,
       };
   }
 }
@@ -95,10 +96,6 @@ export function LockedContentModal({reason, onClose}: LockedContentModalProps) {
             Log in
           </AffiliateLink>
         </div>
-        <p className={styles.disclosure}>
-          <ArrowUpRightIcon size={14} />
-          <span>Affiliate link to {SITE.platformName}</span>
-        </p>
       </div>
     </Modal>
   );

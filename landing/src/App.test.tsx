@@ -4,18 +4,28 @@ import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {App} from './App';
 import {AGE_GATE_STORAGE_KEY} from './components/AgeGate';
 import {AFFILIATE_URL} from './config/affiliate';
+import {COPY} from './config/copy';
 import {PROFILE} from './config/profile';
 import {type AnalyticsEventName, onTrack} from './lib/analytics';
 
 let events: Array<{name: AnalyticsEventName; params: unknown}> = [];
 let stopTracking: () => void;
 
+// 20:30 in Lisbon on a Monday: inside the sample profile's evening availability window.
+const IN_WINDOW = new Date('2026-10-19T19:30:00Z');
+
 beforeEach(() => {
   events = [];
   stopTracking = onTrack((name, params) => events.push({name, params}));
+  // Only Date is faked, so status labels are deterministic while timers and user events run normally.
+  vi.useFakeTimers({toFake: ['Date']});
+  vi.setSystemTime(IN_WINDOW);
 });
 
-afterEach(() => stopTracking());
+afterEach(() => {
+  stopTracking();
+  vi.useRealTimers();
+});
 
 const eventNames = () => events.map((e) => e.name);
 
@@ -50,13 +60,26 @@ describe('profile', () => {
   it('reveals "Available now" shortly after load', async () => {
     renderPastGate();
     const status = screen.getAllByText('Available now')[0]!;
+    expect(status).toHaveAttribute('data-online');
     expect(status).not.toHaveAttribute('data-visible');
     await waitFor(() => expect(status).toHaveAttribute('data-visible'), {timeout: 2500});
   });
 
-  it('expands and collapses the bio', async () => {
+  it('shows when the creator was last active outside the available hours', () => {
+    // 14:35 in Lisbon, 95 minutes after the 10:00-13:00 window ended.
+    vi.setSystemTime(new Date('2026-10-19T13:35:00Z'));
+    renderPastGate();
+    const hero = screen.getByRole('region', {name: PROFILE.name});
+    const status = within(hero).getByText('Active 1 h ago');
+    expect(status).not.toHaveAttribute('data-online');
+    expect(screen.queryByText('Available now')).not.toBeInTheDocument();
+  });
+
+  it('expands and collapses the bio under the name', async () => {
     const user = renderPastGate();
-    const toggle = screen.getByRole('button', {name: 'Read more'});
+    const hero = screen.getByRole('region', {name: PROFILE.name});
+    expect(within(hero).getByText(PROFILE.tagline)).toBeInTheDocument();
+    const toggle = within(hero).getByRole('button', {name: 'Read more'});
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await user.click(toggle);
     expect(toggle).toHaveTextContent('Show less');
@@ -73,12 +96,13 @@ describe('profile', () => {
     await expect(navigator.clipboard.readText()).resolves.toBe(window.location.href);
   });
 
-  it('shows the location under the name and in About me', () => {
+  it('shows the location and the free registration note in the profile header', () => {
     renderPastGate();
     const hero = screen.getByRole('region', {name: PROFILE.name});
     expect(within(hero).getByText(PROFILE.location, {exact: false})).toBeInTheDocument();
-    const about = screen.getByRole('region', {name: 'About me'});
-    expect(within(about).getByText(PROFILE.location)).toBeInTheDocument();
+    expect(within(hero).getByText(COPY.signupNote)).toBeInTheDocument();
+    expect(within(hero).getByRole('link', {name: COPY.unlockProfile})).toBeInTheDocument();
+    expect(screen.queryByRole('region', {name: 'About me'})).not.toBeInTheDocument();
   });
 
   it('does not show a verification badge for an unverified profile', () => {
@@ -94,7 +118,7 @@ describe('locked content', () => {
     await user.click(tile);
 
     const dialog = screen.getByRole('dialog', {name: 'This content is locked'});
-    expect(within(dialog).getByRole('link', {name: 'Create account'})).toBeInTheDocument();
+    expect(within(dialog).getByRole('link', {name: COPY.createAccount})).toBeInTheDocument();
     expect(within(dialog).getByRole('link', {name: 'Log in'})).toBeInTheDocument();
     expect(eventNames()).toEqual(
       expect.arrayContaining(['locked_content_click', 'registration_modal_view']),
@@ -169,7 +193,7 @@ describe('chat', () => {
 
     await user.keyboard('{Enter}');
     const dialog = screen.getByRole('dialog', {name: /Chat with .* on/});
-    expect(within(dialog).getByRole('link', {name: 'Register to chat'})).toBeInTheDocument();
+    expect(within(dialog).getByRole('link', {name: COPY.registerToChat})).toBeInTheDocument();
     expect(within(dialog).getByRole('link', {name: 'Log in'})).toBeInTheDocument();
     expect(fetchSpy).not.toHaveBeenCalled();
 
@@ -243,7 +267,7 @@ describe('affiliate links', () => {
 
   it('tracks CTA clicks with their placement', async () => {
     const user = renderPastGate();
-    const join = screen.getByRole('link', {name: 'Join'});
+    const join = screen.getByRole('link', {name: COPY.join});
     join.addEventListener('click', (e) => e.preventDefault());
     await user.click(join);
     expect(events).toContainEqual({
